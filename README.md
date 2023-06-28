@@ -818,5 +818,5 @@ I would like to thank the excellent developers and all the contributors of free5
 
 <h2 id="changelog">Changelog (summary)</h2>
 
-- [2023.06.27] Updated to free5GC v3.3.0.
+- [2023.06.27] The SMF fixed on 2023.06.27 now works with oai-cn5g-upf-vpp v1.5.1, so I updated to free5GC v3.3.0.
 - [2023.06.15] Initial release.
