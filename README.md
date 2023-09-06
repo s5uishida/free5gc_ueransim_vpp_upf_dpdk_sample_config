@@ -292,7 +292,7 @@ For the sake of simplicity, This time, only DNN will be changed. S-NSSAI of all 
    enable: true # true or false
 ```
 This VPP-UPF requires `Network Instance` encoding in `PFCP Session Establishment Request`, so it is necessary to add the following line to the `smfcfg.yaml` of free5GC.
-```
+```yaml
 ...
 configuration:
   ...
