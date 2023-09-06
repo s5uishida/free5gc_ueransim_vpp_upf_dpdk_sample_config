@@ -291,6 +291,32 @@ For the sake of simplicity, This time, only DNN will be changed. S-NSSAI of all 
  logger: # log output setting
    enable: true # true or false
 ```
+This VPP-UPF requires `Network Instance` encoding in `PFCP Session Establishment Request`, so it is necessary to add the following line to the `smfcfg.yaml` of free5GC.
+```
+...
+configuration:
+  ...
+  nwInstFqdnEncoding: true <--
+...
+```
+Please refer to the following 3GPP specifications for information on this matter.
+```
+3GPP TS 29.244 LTE;5G;Interface between the Control Plane and the User Plane nodes
+- 8 Information Elements
+  - 8.2 Information Elements
+    - 8.2.4 Network Instance
+
+3GPP TS 23.003 LTE;5G;Numbering, addressing and identification
+- 9A Definition of Data Network Name
+  - 9.1 Structure of APN
+
+The encoding of the APN shall follow the Name Syntax defined in RFC 2181 [18], RFC 1035 [19] and RFC 1123 [20].
+The APN consists of one or more labels. Each label is coded as a one octet length field followed by that number of
+octets coded as 8 bit ASCII characters. Following RFC 1035 [19] the labels shall consist only of the alphabetic
+characters (A-Z and a-z), digits (0-9) and the hyphen (-). Following RFC 1123 [20], the label shall begin and end with
+either an alphabetic character or a digit. The case of alphabetic characters is not significant. The APN is not terminated
+by a length byte of zero.
+```
 
 <h3 id="changes_up">Changes in configuration files of VPP-UPF</h3>
 
