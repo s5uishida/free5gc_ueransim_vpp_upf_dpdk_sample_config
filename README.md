@@ -138,7 +138,7 @@ The DN is as follows.
 ## Changes in configuration files of free5GC 5GC, VPP-UPF and UERANSIM UE / RAN
 
 Please refer to the following for building free5GC, VPP-UPF and UERANSIM respectively.
-- free5GC v3.3.0 (2023.07.15) - https://github.com/free5gc/free5gc/wiki/Installation
+- free5GC v3.3.0 (2023.07.15) - https://free5gc.org/guide/
 - OpenAir CN 5G for UPF v1.5.1 (2023.05.15) - https://github.com/s5uishida/install_vpp_upf_dpdk
 - UERANSIM v3.2.6 (2023.06.14) - https://github.com/aligungr/UERANSIM/wiki/Installation
 
@@ -427,31 +427,14 @@ See [this1](https://github.com/s5uishida/install_vpp_upf_dpdk#setup-vpp-upf-with
 ## Build free5GC, VPP-UPF and UERANSIM
 
 Please refer to the following for building free5GC, VPP-UPF and UERANSIM respectively.
-- free5GC v3.3.0 (2023.07.15) - https://github.com/free5gc/free5gc/wiki/Installation
+- free5GC v3.3.0 (2023.07.15) - https://free5gc.org/guide/
 - OpenAir CN 5G for UPF v1.5.1 (2023.05.15) - https://github.com/s5uishida/install_vpp_upf_dpdk
 - UERANSIM v3.2.6 (2023.06.14) - https://github.com/aligungr/UERANSIM/wiki/Installation
 
 Install MongoDB on free5GC 5GC C-Plane machine.
 [MongoDB Compass](https://www.mongodb.com/products/compass) is a convenient tool to look at the MongoDB database.
 
-**Note. If you want to use the latest committed version, please run the following script to checkout all NFs and Web Console to the latest `main` branch before building.**
-```bash
-#!/usr/bin/env bash
-
-NF_LIST="nrf amf smf udr pcf udm nssf ausf upf n3iwf"
-
-for NF in ${NF_LIST}; do
-    cd NFs/${NF}
-    git checkout main
-    cd ../..
-done
-
-cd webconsole
-git checkout main
-
-cd ..
-git checkout main
-```
+**Note. The installation guide also includes instructions on building the latest committed version.**
 
 <a id="run"></a>
 
