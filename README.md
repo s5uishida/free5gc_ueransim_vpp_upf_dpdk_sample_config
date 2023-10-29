@@ -15,6 +15,7 @@ In particular, see [here](https://github.com/s5uishida/install_vpp_upf_dpdk) for
 5. [ULCL(Uplink Classifier)](https://github.com/s5uishida/free5gc_ueransim_ulcl_sample_config)
 6. [ULCL with one I-UPF and two PSA-UPFs](https://github.com/s5uishida/free5gc_ueransim_ulcl_2_sample_config)
 7. VPP-UPF with DPDK (this article)
+8. [eUPF(eBPF/XDP UPF)](https://github.com/s5uishida/free5gc_ueransim_eupf_sample_config)
 
 ---
 
