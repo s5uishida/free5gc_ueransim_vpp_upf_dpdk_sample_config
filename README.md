@@ -1,8 +1,6 @@
-# free5GC 5GC & UERANSIM UE / RAN Sample Configuration - VPP-UPF with DPDK
-This describes a simple configuration for working free5GC and VPP-UPF with DPDK.
-In particular, see [here](https://github.com/s5uishida/install_vpp_upf_dpdk#annex_1) for VPP-UPF with DPDK configuration.
-
-**If UPG-VPP built with [this instruction](https://github.com/s5uishida/install_vpp_upf_dpdk#annex_1) does not work well, please try OAI-CN5G-UPF-VPP built with [this instruction](https://github.com/s5uishida/install_vpp_upf_dpdk#build).**
+# free5GC 5GC & UERANSIM UE / RAN Sample Configuration - UPG-VPP(VPP/DPDK UPF)
+This describes a simple configuration for working free5GC and UPG-VPP.
+In particular, see [here](https://github.com/s5uishida/install_vpp_upf_dpdk) for UPG-VPP configuration.
 
 ---
 
@@ -15,17 +13,17 @@ In particular, see [here](https://github.com/s5uishida/install_vpp_upf_dpdk#anne
 ## Table of Contents
 
 - [Overview of free5GC 5GC Simulation Mobile Network](#overview)
-- [Changes in configuration files of free5GC 5GC, VPP-UPF and UERANSIM UE / RAN](#changes)
+- [Changes in configuration files of free5GC 5GC, UPG-VPP and UERANSIM UE / RAN](#changes)
   - [Changes in configuration files of free5GC 5GC C-Plane](#changes_cp)
-  - [Changes in configuration files of VPP-UPF](#changes_up)
+  - [Changes in configuration files of UPG-VPP](#changes_up)
   - [Changes in configuration files of UERANSIM UE / RAN](#changes_ueransim)
     - [Changes in configuration files of RAN](#changes_ran)
     - [Changes in configuration files of UE (IMSI-001010000000000)](#changes_ue)
-- [Network settings of free5GC 5GC, VPP-UPF and UERANSIM UE / RAN](#network_settings)
-  - [Network settings of VPP-UPF and Data Network Gateway](#network_settings_up)
-- [Build free5GC, VPP-UPF and UERANSIM](#build)
-- [Run free5GC 5GC, VPP-UPF and UERANSIM UE / RAN](#run)
-  - [Run VPP-UPF](#run_up)
+- [Network settings of free5GC 5GC, UPG-VPP and UERANSIM UE / RAN](#network_settings)
+  - [Network settings of UPG-VPP and Data Network Gateway](#network_settings_up)
+- [Build free5GC, UPG-VPP and UERANSIM](#build)
+- [Run free5GC 5GC, UPG-VPP and UERANSIM UE / RAN](#run)
+  - [Run UPG-VPP](#run_up)
   - [Run free5GC 5GC C-Plane](#run_cp)
   - [Run UERANSIM](#run_ueran)
     - [Start gNB](#start_gnb)
@@ -40,7 +38,7 @@ In particular, see [here](https://github.com/s5uishida/install_vpp_upf_dpdk#anne
 
 ## Overview of free5GC 5GC Simulation Mobile Network
 
-This describes a simple configuration of C-Plane, VPP-UPF and Data Network Gateway for free5GC.
+This describes a simple configuration of C-Plane, UPG-VPP and Data Network Gateway for free5GC.
 **Note that this configuration is implemented with Proxmox VE VMs.**
 
 The following minimum configuration was set as a condition.
@@ -51,9 +49,9 @@ The built simulation environment is as follows.
 
 <img src="./images/network-overview.png" title="./images/network-overview.png" width=1000px></img>
 
-The 5GC / VPP-UPF / UE / RAN used are as follows.
+The 5GC / VPP/DPDK UPF / UE / RAN used are as follows.
 - 5GC - free5GC v4.0.1 (2025.04.27) - https://github.com/free5gc/free5gc
-- VPP-UPF - UPG-VPP v1.13.0 (2024.03.25) - https://github.com/travelping/upg-vpp
+- VPP/DPDK UPF - UPG-VPP v1.13.0 (2024.03.25) - https://github.com/travelping/upg-vpp
 - UE / RAN - UERANSIM v3.2.7 (2025.04.28) - https://github.com/aligungr/UERANSIM
 
 Each VMs are as follows.  
@@ -67,7 +65,7 @@ Each VMs are as follows.
 
 The network interfaces of each VM are as follows.
 **Note. Do not enable(up) any devices that will be under the control of DPDK.
-These devices will be enabled and set IP addresses in the `init.conf` file of VPP-UPF.**
+These devices will be enabled and set IP addresses in the `init.conf` file of UPG-VPP.**
 | VM | Device | Model | Linux Bridge | IP address | Interface | Under DPDK |
 | --- | --- | --- | --- | --- | --- | --- |
 | VM1 | ens18 | VirtIO | vmbr1 | 10.0.0.141/24 | (NAPT NW) | -- |
@@ -117,11 +115,11 @@ The DN is as follows.
 
 <a id="changes"></a>
 
-## Changes in configuration files of free5GC 5GC, VPP-UPF and UERANSIM UE / RAN
+## Changes in configuration files of free5GC 5GC, UPG-VPP and UERANSIM UE / RAN
 
-Please refer to the following for building free5GC, VPP-UPF and UERANSIM respectively.
+Please refer to the following for building free5GC, UPG-VPP and UERANSIM respectively.
 - free5GC v4.0.1 (2025.04.27) - https://free5gc.org/guide/
-- UPG-VPP v1.13.0 (2024.03.25) - https://github.com/s5uishida/install_vpp_upf_dpdk#annex_1
+- UPG-VPP v1.13.0 (2024.03.25) - https://github.com/s5uishida/install_vpp_upf_dpdk
 - UERANSIM v3.2.7 (2025.04.28) - https://github.com/aligungr/UERANSIM/wiki/Installation
 
 <a id="changes_cp"></a>
@@ -291,19 +289,19 @@ For the sake of simplicity, This time, only DNN will be changed. S-NSSAI of all 
    t3591:
      enable: true # true or false
 ```
-This VPP-UPF requires `Network Instance` encoding in `PFCP Session Establishment Request`.
+This UPG-VPP requires `Network Instance` encoding in `PFCP Session Establishment Request`.
 For more information, please see [here](https://github.com/s5uishida/enable_network_instance_encoding_free5gc_v3_3_0).
 
 <a id="changes_up"></a>
 
-### Changes in configuration files of VPP-UPF
+### Changes in configuration files of UPG-VPP
 
-See [here](https://github.com/s5uishida/install_vpp_upf_dpdk#changes_up) for the original files.
+See [here](https://github.com/s5uishida/install_vpp_upf_dpdk#conf) for the original files.
 
-- `openair-upf/startup.conf`  
+- `upg-vpp/startup.conf`  
 There is no change.
 
-- `openair-upf/init.conf`  
+- `upg-vpp/init.conf`  
 There is no change.
 
 <a id="changes_ueransim"></a>
@@ -378,21 +376,21 @@ There is no change.
 
 <a id="network_settings"></a>
 
-## Network settings of free5GC 5GC, VPP-UPF and UERANSIM UE / RAN
+## Network settings of free5GC 5GC, UPG-VPP and UERANSIM UE / RAN
 
 <a id="network_settings_up"></a>
 
-### Network settings of VPP-UPF and Data Network Gateway
+### Network settings of UPG-VPP and Data Network Gateway
 
 See [this1](https://github.com/s5uishida/install_vpp_upf_dpdk#setup_up) and [this2](https://github.com/s5uishida/install_vpp_upf_dpdk#setup_dn).
 
 <a id="build"></a>
 
-## Build free5GC, VPP-UPF and UERANSIM
+## Build free5GC, UPG-VPP and UERANSIM
 
-Please refer to the following for building free5GC, VPP-UPF and UERANSIM respectively.
+Please refer to the following for building free5GC, UPG-VPP and UERANSIM respectively.
 - free5GC v4.0.1 (2025.04.27) - https://free5gc.org/guide/
-- UPG-VPP v1.13.0 (2024.03.25) - https://github.com/s5uishida/install_vpp_upf_dpdk#annex_1
+- UPG-VPP v1.13.0 (2024.03.25) - https://github.com/s5uishida/install_vpp_upf_dpdk
 - UERANSIM v3.2.7 (2025.04.28) - https://github.com/aligungr/UERANSIM/wiki/Installation
 
 Install MongoDB on free5GC 5GC C-Plane machine.
@@ -402,15 +400,15 @@ Install MongoDB on free5GC 5GC C-Plane machine.
 
 <a id="run"></a>
 
-## Run free5GC 5GC, VPP-UPF and UERANSIM UE / RAN
+## Run free5GC 5GC, UPG-VPP and UERANSIM UE / RAN
 
-First run VPP-UPF, then the 5GC and UERANSIM (UE & RAN implementation).
+First run UPG-VPP, then the 5GC and UERANSIM (UE & RAN implementation).
 
 <a id="run_up"></a>
 
-### Run VPP-UPF
+### Run UPG-VPP
 
-See [this](https://github.com/s5uishida/install_vpp_upf_dpdk#run_upg_vpp).
+See [this](https://github.com/s5uishida/install_vpp_upf_dpdk#run).
 
 <a id="run_cp"></a>
 
@@ -443,7 +441,7 @@ trap terminate SIGINT
 wait ${PID_LIST}
 ```
 
-The status of PFCP association between VPP-UPF and free5GC SMF is as follows.
+The status of PFCP association between UPG-VPP and free5GC SMF is as follows.
 ```
 vpp# show upf association 
 Node: 192.168.14.141
@@ -863,7 +861,7 @@ Xres*: 3962386264663230636536306534333032373830376133336230303837633837
 2025-05-04T20:21:01.937900014+09:00 [INFO][SMF][PduSess] Received PFCP Session Modification Accepted Response from AN UPF
 2025-05-04T20:21:01.938254287+09:00 [INFO][SMF][GIN] | 200 |       127.0.0.1 | POST    | /nsmf-pdusession/v1/sm-contexts/urn:uuid:98897ae0-4465-46c5-948d-9d6002f06930/modify |
 ```
-The PDU session establishment status of VPP-UPF is as follows.
+The PDU session establishment status of UPG-VPP is as follows.
 ```
 vpp# show upf session 
 CP F-SEID: 0x0000000000000001 (1) @ 192.168.14.141
@@ -1036,12 +1034,12 @@ The document has moved
 20:26:35.923216 IP 10.60.0.1.59979 > 172.217.161.78.80: Flags [.], ack 775, win 504, options [nop,nop,TS val 4253257089 ecr 2832494972], length 0
 ```
 Please note that the `ping` tool does not work with `nr-binder`. Please refer to [here](https://github.com/aligungr/UERANSIM/issues/186#issuecomment-729534464) for the reason.
-You could now connect to the DN and send any packets on the network using VPP-UPF with DPDK.
+You could now connect to the DN and send any packets on the network using UPG-VPP.
 
 ---
 
-Now you could work free5GC with VPP-UPF.
-I would like to thank the excellent developers and all the contributors of free5GC, OpenAir CN 5G for UPF, UPG-VPP, VPP, DPDK and UERANSIM.
+Now you could work free5GC with UPG-VPP.
+I would like to thank the excellent developers and all the contributors of free5GC, UPG-VPP, VPP, DPDK and UERANSIM.
 
 <a id="changelog"></a>
 
@@ -1049,7 +1047,7 @@ I would like to thank the excellent developers and all the contributors of free5
 
 - [2025.05.04] Updated to UPG-VPP `v1.13.0`, free5GC `v4.0.1 (2025.04.27)` and UERANSIM `v3.2.7 (2025.04.28)`. Changed the VM environment from Virtualbox to Proxmox VE.
 - [2024.03.24] Updated to UPG-VPP `v1.12.0`.
-- [2023.11.10] Changed VPP-UPF from [oai-cn5g-upf-vpp](https://gitlab.eurecom.fr/oai/cn5g/oai-cn5g-upf-vpp) to its base [travelping/upg-vpp](https://github.com/travelping/upg-vpp).
+- [2023.11.10] Changed from [oai-cn5g-upf-vpp](https://gitlab.eurecom.fr/oai/cn5g/oai-cn5g-upf-vpp) to its base [travelping/upg-vpp](https://github.com/travelping/upg-vpp).
 - [2023.07.15] Enabled URR in `smfcfg.yaml`.
 - [2023.06.27] The SMF fixed on 2023.06.27 now works with oai-cn5g-upf-vpp `v1.5.1`, so I updated to free5GC `v3.3.0`.
 - [2023.06.15] Initial release.
