@@ -1,4 +1,4 @@
-# free5GC 5GC & UERANSIM UE / RAN Sample Configuration - UPG-VPP(VPP/DPDK UPF)
+# free5GC 5GC & UERANSIM UE / RAN Sample Configuration - UPG-VPP(DPDK/VPP UPF)
 This describes a simple configuration for working free5GC and UPG-VPP.
 In particular, see [here](https://github.com/s5uishida/install_vpp_upf_dpdk) for UPG-VPP configuration.
 
@@ -49,9 +49,9 @@ The built simulation environment is as follows.
 
 <img src="./images/network-overview.png" title="./images/network-overview.png" width=1000px></img>
 
-The 5GC / VPP/DPDK UPF / UE / RAN used are as follows.
+The 5GC / DPDK/VPP UPF / UE / RAN used are as follows.
 - 5GC - free5GC v4.0.1 (2025.04.27) - https://github.com/free5gc/free5gc
-- VPP/DPDK UPF - UPG-VPP v1.13.0 (2024.03.25) - https://github.com/travelping/upg-vpp
+- DPDK/VPP UPF - UPG-VPP v1.13.0 (2024.03.25) - https://github.com/travelping/upg-vpp
 - UE / RAN - UERANSIM v3.2.7 (2025.04.28) - https://github.com/aligungr/UERANSIM
 
 Each VMs are as follows.  
